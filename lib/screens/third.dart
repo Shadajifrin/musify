@@ -34,7 +34,90 @@ class _Musify3State extends State<Musify3> {
         backgroundColor: MyColors.basicColors,
         title: Center(child: Text("Musify.", style: MyTextThemes.textHeading)),
       ),
-      body: _buildPage(_currentIndex),
+      body: Container(
+        color: Colors.black,
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Suggested Playlist',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: MyColors.textColors),
+              ),
+            ),
+            Container(
+              height: 150, // Adjust height as needed
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: suggestedPlaylists.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      suggestedPlaylists[index]['imageUrl'],
+                      width: 150, // Adjust width as needed
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Recommended for You',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color:MyColors.textColors),
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: recommendedContent.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  tileColor: Colors.grey[900],
+                  leading: Image.network(
+                    recommendedContent[index]['imageUrl'],
+                    width: 80, // Adjust width as needed
+                    fit: BoxFit.cover,
+                  ),
+                  title: Text(
+                    recommendedContent[index]['title'],
+                    style: TextStyle(color: MyColors.textColors),
+                  ),
+                  subtitle: Text(
+                    recommendedContent[index]['subtitle'],
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          // Handle left icon press
+                        },
+                        icon: Icon(
+                          recommendedContent[index]['leftIcon'],
+                          color: MyColors.textColors,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Handle right icon press
+                        },
+                        icon: Icon(
+                          recommendedContent[index]['rightIcon'],
+                          color: MyColors.textColors,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,19 +154,84 @@ class _Musify3State extends State<Musify3> {
       ),
     );
   }
-
-  Widget _buildPage(int index) {
-    switch (index) {
-      case 0: // Home
-        return Container(child: Center(child: Text('Home Page')));
-      case 1: // Search
-        return Container(child: Center(child: Text('Search Page')));
-      case 2: // Playlist
-        return Container(child: Center(child: Text('Playlist Page')));
-      case 3: // More
-        return Container(child: Center(child: Text('More Page')));
-      default:
-        return Container();
-    }
-  }
 }
+
+// Mock data, replace it with your actual data
+final List<Map<String, dynamic>> suggestedPlaylists = [
+  {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.-o0JZhrwJnDfiulOqqZAbgHaHa&pid=Api&P=0&h=180',
+  },
+  {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.SsRHmLRKbsAIOYxvV5uRbAHaHa&pid=Api&P=0&h=180',
+  },
+  {
+    'imageUrl': 'https://tse1.mm.bing.net/th?id=OIP.UNbY_LP1k5eVSOnEyW1lrwHaHa&pid=Api&P=0&h=180',
+  },
+];
+
+// Mock data, replace it with your actual data
+final List<Map<String, dynamic>> recommendedContent = [
+  {
+    'imageUrl': 'https://tse4.mm.bing.net/th?id=OIP.CIHuZabcWTnD2BFyYpSLGAHaE6&pid=Api&P=0&h=180',
+    'title': 'Hero',
+    'subtitle': 'Taylor Swift',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+  {
+    'imageUrl': 'https://tse4.mm.bing.net/th?id=OIP.ArmDVeUU7CPgr-dkBes8JwAAAA&pid=Api&P=0&h=180',
+    'title': 'Unholy',
+    'subtitle': 'Sam Smith,Kim Petras',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+  {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.oYJpVlU4uskSbqQSoycNWQHaE5&pid=Api&P=0&h=180',
+    'title': 'Lift Me Up',
+    'subtitle': 'Rihanna',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+   {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.MdjLRKddMYdnjorgJRS43gHaEK&pid=Api&P=0&h=180',
+    'title': 'Depression',
+    'subtitle': 'Dax',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+  {
+    'imageUrl': 'https://tse1.mm.bing.net/th?id=OIP.BQ4uFtosYWJNq46vMmLmzAHaEK&pid=Api&P=0&h=180',
+    'title': 'Im Good',
+    'subtitle': 'David Guetta & Bebe Rehxa',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+  {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.oYJpVlU4uskSbqQSoycNWQHaE5&pid=Api&P=0&h=180',
+    'title': 'Lift Me Up',
+    'subtitle': 'Rihanna',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+ {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.oYJpVlU4uskSbqQSoycNWQHaE5&pid=Api&P=0&h=180',
+    'title': 'Lift Me Up',
+    'subtitle': 'Rihanna',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+   {
+    'imageUrl': 'https://tse3.mm.bing.net/th?id=OIP.MdjLRKddMYdnjorgJRS43gHaEK&pid=Api&P=0&h=180',
+    'title': 'Depression',
+    'subtitle': 'Dax',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+  {
+    'imageUrl': 'https://tse1.mm.bing.net/th?id=OIP.BQ4uFtosYWJNq46vMmLmzAHaEK&pid=Api&P=0&h=180',
+    'title': 'Im Good',
+    'subtitle': 'David Guetta & Bebe Rehxa',
+    'leftIcon': Icons.star_border_outlined,
+    'rightIcon': Icons.download_outlined,
+  },
+];

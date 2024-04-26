@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:musify/screens/nowplaying.dart';
-//import 'package:musify/screens/playlist.dart';
 //import 'package:musify/screens/third.dart';
+//import 'package:musify/screens/playlist.dart';
+
 void main(){
   runApp(MyApp());
 }
@@ -11,11 +12,11 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: NowPlayingPage(),
-      // routes: {
+    // routes: {
         
        
-      //   '/playlist': (context) => PlaylistPage(),
-      // },
+    //   '/playlist': (context) => PlaylistPage(),
+    //    },
       
      
     );
